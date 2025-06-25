@@ -56,7 +56,7 @@ Feel free to explore my activity and statistics on GitHub! 📈
 
 Here are some of my most popular or relevant projects:
 
-* **[Your Project Name 1](https://github.com/marcosnobre26/YOUR_REPOSITORY_1):** A brief description of the project and what it does. ✨
+* **[Machine Learning API in Java (using externally trained model)](https://github.com/marcosnobre26/project-java-pure):** A brief description of the project and what it does. ✨
 * **[Your Project Name 2](https://github.com/marcosnobre26/YOUR_REPOSITORY_2):** Another brief description. 🛠️
 * **[Your Project Name 3](https://github.com/marcosnobre26/YOUR_REPOSITORY_3):** A description of the project and technologies used. 💡
 
