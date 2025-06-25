@@ -2,41 +2,73 @@ name: GitHub Metrics
 
 on:
   # Schedule daily updates
-  schedule: [{cron: "0 0 * * *"}]
-  # Run workflow manually
+  schedule: [{cron: "0 0 * * *"}] # Roda todos os dias à meia-noite UTC
+  # Run workflow manually (opcional: para rodar quando quiser pela aba Actions)
   workflow_dispatch:
 
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # Permissão necessária para a ação commitar o SVG
     steps:
       - uses: lowlighter/metrics@latest
         with:
-          # Your GitHub token
-          # The following token is provided by GitHub Actions by default
+          # Sua identidade no GitHub
           token: ${{ secrets.GITHUB_TOKEN }}
+          user: marcosnobre26 # Seu nome de usuário do GitHub
+          config_timezone: America/Sao_Paulo # Seu fuso horário (ex: America/Sao_Paulo)
 
-          # Options
-          user: marcosnobre26 # Substitua pelo seu usuário GitHub
-          template: classic
+          # Nome do arquivo de saída
+          output_filename: github-metrics.svg
+
+          # Configurações básicas (o que vai na imagem principal)
+          template: classic # Pode ser 'classic', 'repository', 'terminal', 'sparkline'
           base: header, activity, community, repositories, metadata
-          config_timezone: America/Sao_Paulo # Ou seu fuso horário
-          output_filename: github-metrics.svg # Nome do arquivo que será gerado
-          # Exemplo de algumas opções adicionais (descomente e personalize se quiser):
-          # plugins_languages: yes
-          # plugins_languages_sections: most-used
-          # plugins_languages_threshold: 0%
-          # plugins_achievements: yes
-          # plugins_achievements_threshold: C
-          # plugins_followup: yes
-          # plugins_followup_sections: repositories, user
-          # plugins_stargazers: yes
-          # plugins_stargazers_sections: repositories
-          # plugins_topics: yes
-          # plugins_topics_sections: most-used
-          # plugins_topics_limit: 10
-          # plugins_isocalendar: yes
-          # plugins_isocalendar_duration: full-year
-          # plugins_isocalendar_contrib_types: push, pull_request, issues, discussions, reviews, releases
+
+          # ---------- PLUGINS ADICIONAIS ----------
+          # Para ver todas as opções, visite: https://github.com/lowlighter/metrics
+
+          # 1. Linguagens mais usadas (Most used languages)
+          plugins_languages: yes
+          plugins_languages_sections: most-used # Ou 'recent', 'popular'
+          plugins_languages_threshold: 0%      # Inclui linguagens com qualquer percentual
+          plugins_languages_other: no          # Não agrupa as menores em 'Other'
+          plugins_languages_indepth: yes       # Analisa repositórios com pouca atividade também
+          plugins_languages_colors: github     # Usa as cores do GitHub para as linguagens
+
+          # 2. Calendário de contribuições (Isometric contributions calendar)
+          plugins_isocalendar: yes
+          plugins_isocalendar_duration: full-year # 'full-year' ou número de dias
+
+          # 3. Estatísticas de realização (Achievements)
+          plugins_achievements: yes
+          plugins_achievements_threshold: C # Nível de exibição (A, B, C)
+          plugins_achievements_secrets: yes # Exibe achievements de repositórios privados
+
+          # 4. Melhores tópicos/tecnologias (Top topics)
+          plugins_topics: yes
+          plugins_topics_limit: 8            # Número de tópicos a exibir
+          plugins_topics_mode: mastered      # Ou 'starred' (de repositórios que você deu estrela)
+          plugins_topics_sort: asc           # Ou 'desc'
+
+          # 5. Follow-up de Issues e PRs (Issues and Pull Requests)
+          plugins_followup: yes
+          plugins_followup_sections: repositories, user
+          plugins_followup_sections_repositories_limit: 3 # Limite de repositórios para mostrar
+
+          # 6. Estrelas de repositórios (Stargazers)
+          plugins_stargazers: yes
+
+          # 7. Contribuições anuais (Annual contributions)
+          plugins_lines: yes # Mostra linhas de código adicionadas/removidas
+          plugins_lines_sections: repositories, user
+
+          # Exemplo de uma configuração mais densa (descomente e ajuste se quiser)
+          # plugins_traffic: yes # Visitas ao perfil
+          # plugins_traffic_json: yes
+          # plugins_traffic_graphs: yes
+          # plugins_notforked: yes # Repositórios não forked
+          # plugins_wakatime: yes # Integração com Wakatime (se você usa)
+          # plugins_wakatime_token: ${{ secrets.WAKATIME_TOKEN }} # Necessário criar um secret no GitHub
+          # plugins_wakatime_sections: time, projects, languages, editors, os
