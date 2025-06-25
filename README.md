@@ -38,8 +38,6 @@ Aqui estão algumas das tecnologias e ferramentas com as quais tenho experiênci
 
 Fique à vontade para explorar minhas atividades e estatísticas no GitHub! 📈
 
-`![GitHub Metrics](https://github.com/marcosnobre26/marcosnobre26/blob/main/github-metrics.svg)`
-
 <p align="center">
   <a href="https://github.com/marcosnobre26">
     <img src="https://github-readme-stats.vercel.app/api?username=marcosnobre26&show_icons=true&theme=dark&include_all_commits=true&count_private=true&hide_title=true&locale=pt-br&border_radius=10&line_height=25&hide_border=true" 
