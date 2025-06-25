@@ -1,9 +1,9 @@
 name: GitHub Metrics
 
 on:
-  # Schedule daily updates
-  schedule: [{cron: "0 0 * * *"}] # Roda todos os dias à meia-noite UTC
-  # Run workflow manually (opcional: para rodar quando quiser pela aba Actions)
+  # Schedule daily updates (rodar todos os dias à meia-noite UTC)
+  schedule: [{cron: "0 0 * * *"}]
+  # Allow manual workflow run (para rodar manualmente pela aba Actions)
   workflow_dispatch:
 
 jobs:
@@ -14,61 +14,82 @@ jobs:
     steps:
       - uses: lowlighter/metrics@latest
         with:
-          # Sua identidade no GitHub
-          token: ${{ secrets.GITHUB_TOKEN }}
-          user: marcosnobre26 # Seu nome de usuário do GitHub
-          config_timezone: America/Sao_Paulo # Seu fuso horário (ex: America/Sao_Paulo)
+          # --- Configurações Essenciais ---
+          token: ${{ secrets.GITHUB_TOKEN }} # Seu token de acesso (fornecido pelo GitHub Actions)
+          user: marcosnobre26 # SEU NOME DE USUÁRIO DO GITHUB (NÃO ESQUEÇA DE VERIFICAR!)
+          config_timezone: America/Sao_Paulo # SEU FUSO HORÁRIO (ex: America/Sao_Paulo)
+          output_filename: github-metrics.svg # Nome do arquivo de saída (certifique-se de que o README.md aponta para ele!)
 
-          # Nome do arquivo de saída
-          output_filename: github-metrics.svg
+          # --- Configurações Visuais Chamativas ---
+          template: classic # Template 'classic' é ótimo para combinar vários plugins
+          theme: dark # Tema escuro com bom contraste (experimente 'dracula', 'radical', 'onedark')
+          base: header, activity, community, repositories, metadata # Seções básicas no topo
+          config_display: columns # Tenta organizar os plugins em colunas para otimizar espaço
 
-          # Configurações básicas (o que vai na imagem principal)
-          template: classic # Pode ser 'classic', 'repository', 'terminal', 'sparkline'
-          base: header, activity, community, repositories, metadata
+          # --- Plugins Avançados e Visuais ---
 
-          # ---------- PLUGINS ADICIONAIS ----------
-          # Para ver todas as opções, visite: https://github.com/lowlighter/metrics
-
-          # 1. Linguagens mais usadas (Most used languages)
+          # 1. Linguagens mais usadas (Most used languages) - Visualmente rico com cores
           plugins_languages: yes
-          plugins_languages_sections: most-used # Ou 'recent', 'popular'
-          plugins_languages_threshold: 0%      # Inclui linguagens com qualquer percentual
+          plugins_languages_sections: most-used # Mostra as linguagens mais usadas
+          plugins_languages_threshold: 0%      # Inclui todas as linguagens (mesmo com % pequeno)
           plugins_languages_other: no          # Não agrupa as menores em 'Other'
-          plugins_languages_indepth: yes       # Analisa repositórios com pouca atividade também
-          plugins_languages_colors: github     # Usa as cores do GitHub para as linguagens
+          plugins_languages_indepth: yes       # Análise mais profunda
+          plugins_languages_colors: github     # Usa as cores padrão do GitHub para as linguagens
+          plugins_languages_details: bytes, percentage # Mostra bytes e percentual
 
-          # 2. Calendário de contribuições (Isometric contributions calendar)
+          # 2. Calendário de contribuições (Isometric contributions calendar) - Impacto visual alto
           plugins_isocalendar: yes
-          plugins_isocalendar_duration: full-year # 'full-year' ou número de dias
+          plugins_isocalendar_duration: full-year # Exibe o ano completo de contribuições
 
-          # 3. Estatísticas de realização (Achievements)
+          # 3. Estatísticas de realização (Achievements) - Adiciona badges de conquistas
           plugins_achievements: yes
-          plugins_achievements_threshold: C # Nível de exibição (A, B, C)
-          plugins_achievements_secrets: yes # Exibe achievements de repositórios privados
+          plugins_achievements_threshold: C # Exibe conquistas de nível C ou superior
+          plugins_achievements_secrets: yes # Inclui conquistas de repositórios privados
+          plugins_achievements_display: compact # Compacta a exibição
 
-          # 4. Melhores tópicos/tecnologias (Top topics)
+          # 4. Melhores tópicos/tecnologias (Top topics) - Mostra tags visuais
           plugins_topics: yes
-          plugins_topics_limit: 8            # Número de tópicos a exibir
-          plugins_topics_mode: mastered      # Ou 'starred' (de repositórios que você deu estrela)
-          plugins_topics_sort: asc           # Ou 'desc'
+          plugins_topics_limit: 10 # Mais tópicos para uma visualização rica
+          plugins_topics_mode: mastered # Tópicos de repositórios que você domina
+          plugins_topics_sort: asc # Ordem alfabética (pode ser 'desc' para decrescente)
 
-          # 5. Follow-up de Issues e PRs (Issues and Pull Requests)
+          # 5. Follow-up de Issues e PRs (Issues and Pull Requests) - Monitora atividades
           plugins_followup: yes
           plugins_followup_sections: repositories, user
-          plugins_followup_sections_repositories_limit: 3 # Limite de repositórios para mostrar
+          plugins_followup_sections_repositories_limit: 4 # Mais repositórios visíveis
 
-          # 6. Estrelas de repositórios (Stargazers)
+          # 6. Estrelas de repositórios (Stargazers) - Mostra popularidade dos seus projetos
           plugins_stargazers: yes
 
-          # 7. Contribuições anuais (Annual contributions)
+          # 7. Contribuições anuais (Annual contributions) - Gráfico de linhas de código
           plugins_lines: yes # Mostra linhas de código adicionadas/removidas
-          plugins_lines_sections: repositories, user
+          plugins_lines_sections: repositories, user # Detalhes por repositório e usuário
 
-          # Exemplo de uma configuração mais densa (descomente e ajuste se quiser)
-          # plugins_traffic: yes # Visitas ao perfil
-          # plugins_traffic_json: yes
-          # plugins_traffic_graphs: yes
-          # plugins_notforked: yes # Repositórios não forked
-          # plugins_wakatime: yes # Integração com Wakatime (se você usa)
-          # plugins_wakatime_token: ${{ secrets.WAKATIME_TOKEN }} # Necessário criar um secret no GitHub
-          # plugins_wakatime_sections: time, projects, languages, editors, os
+          # 8. Atividade Recente (Recent activity) - Mais detalhado
+          plugins_activity: yes
+          plugins_activity_filter: all # Exibe todos os tipos de atividade
+          plugins_activity_limit: 5 # Limita o número de eventos para não sobrecarregar
+          plugins_activity_days: 14 # Atividade dos últimos 14 dias
+
+          # 9. Tráfego de Visitas (Profile traffic) - Indicadores de popularidade
+          plugins_traffic: yes
+          plugins_traffic_json: yes # Gera dados JSON (para uso futuro, se quiser)
+          plugins_traffic_graphs: yes # Exibe gráficos de visitas
+          plugins_traffic_days: 14 # Dados dos últimos 14 dias
+
+          # 10. Wakatime (Se você usa para rastrear tempo de codificação) - MUITO CHAMATIVO para devs
+          # NECESSÁRIO: Criar um Secret no seu repositório chamado WAKATIME_TOKEN
+          # Vá em Settings > Secrets and variables > Actions > New repository secret
+          # Se não usar Wakatime, REMOVA AS PRÓXIMAS 5 LINHAS.
+          plugins_wakatime: yes
+          plugins_wakatime_token: ${{ secrets.WAKATIME_TOKEN }}
+          plugins_wakatime_sections: time, projects, languages, editors, os # Mostra tempo, projetos, linguagens, editores, OS
+          plugins_wakatime_limit: 5 # Limita os itens para cada seção
+          plugins_wakatime_days: 7 # Dados dos últimos 7 dias
+
+          # 11. Organizações (Organizations) - Se você participa de alguma
+          plugins_organizations: yes
+          plugins_organizations_limit: 3 # Limita o número de organizações exibidas
+
+          # 12. Repositórios "Not Forked" (Aqueles que não são forks) - Para destacar projetos próprios
+          plugins_notforked: yes
