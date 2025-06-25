@@ -38,16 +38,9 @@ Aqui estão algumas das tecnologias e ferramentas com as quais tenho experiênci
 
 Fique à vontade para explorar minhas atividades e estatísticas no GitHub! 📈
 
-<p align="center">
-  <a href="https://github.com/marcosnobre26">
-    <img src="https://github-readme-stats.vercel.app/api?username=marcosnobre26&show_icons=true&theme=dark&include_all_commits=true&count_private=true&hide_title=true&locale=pt-br&border_radius=10&line_height=25&hide_border=true" 
-         alt="Estatísticas do GitHub do Marcos Nobre" />
-  </a>
-  &nbsp;&nbsp;&nbsp;&nbsp; <a href="https://github.com/marcosnobre26">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=marcosnobre26&layout=compact&hide_title=true&theme=dark&langs_count=5&hide=html,css,jupyter%20notebook&locale=pt-br&border_radius=10&hide_border=true" 
-         alt="Top Linguagens do Marcos Nobre" />
-  </a>
-</p>
+![GitHub Metrics](https://github.com/marcosnobre26/marcosnobre26/blob/main/github-metrics.svg)
+
+
 
 ---
 
