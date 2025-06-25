@@ -1,0 +1,42 @@
+name: GitHub Metrics
+
+on:
+  # Schedule daily updates
+  schedule: [{cron: "0 0 * * *"}]
+  # Run workflow manually
+  workflow_dispatch:
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          # The following token is provided by GitHub Actions by default
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Options
+          user: marcosnobre26 # Substitua pelo seu usuário GitHub
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: America/Sao_Paulo # Ou seu fuso horário
+          output_filename: github-metrics.svg # Nome do arquivo que será gerado
+          # Exemplo de algumas opções adicionais (descomente e personalize se quiser):
+          # plugins_languages: yes
+          # plugins_languages_sections: most-used
+          # plugins_languages_threshold: 0%
+          # plugins_achievements: yes
+          # plugins_achievements_threshold: C
+          # plugins_followup: yes
+          # plugins_followup_sections: repositories, user
+          # plugins_stargazers: yes
+          # plugins_stargazers_sections: repositories
+          # plugins_topics: yes
+          # plugins_topics_sections: most-used
+          # plugins_topics_limit: 10
+          # plugins_isocalendar: yes
+          # plugins_isocalendar_duration: full-year
+          # plugins_isocalendar_contrib_types: push, pull_request, issues, discussions, reviews, releases
