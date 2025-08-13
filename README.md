@@ -58,7 +58,7 @@ Here are some of my most popular or relevant projects:
 
 * **[Machine Learning API in Java (using externally trained model)](https://github.com/marcosnobre26/project-java-pure):** implementation of a brief training algorithm to exercise Machine learning (ML) in JAVA. ✨
 * **[Legal Case (in the future implementing process registration with blockchain)](https://github.com/marcosnobre26/Legal-Case):** A small implementation of good practices and DDD using Java and legal context. 🛠️
-* **[Your Project Name 3](https://github.com/marcosnobre26/YOUR_REPOSITORY_3):** A description of the project and technologies used. 💡
+* **[Project Blockchain - Ruby](https://github.com/marcosnobre26/BlockChain-Ruby):** A simple and scalable application project made in ruby using blockchain technology. 💡
 
 ---
 
